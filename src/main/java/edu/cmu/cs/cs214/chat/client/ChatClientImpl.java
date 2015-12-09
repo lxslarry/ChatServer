@@ -26,19 +26,16 @@ public class ChatClientImpl extends Thread implements ChatClient {
     private List<ClientChangeListener> listeners = new ArrayList<ClientChangeListener>();
 
 
-    @Override
     public void addClientChangeListener(ClientChangeListener listener) {
         listeners.add(listener);
     }
 
 
-    @Override
     public void removeClientChangeListener(ClientChangeListener listener) {
         listeners.remove(listener);
     }
 
 
-    @Override
     public boolean sendMessage(String message) {
         try {
             Message msg = new Message(message, username);
@@ -58,19 +55,16 @@ public class ChatClientImpl extends Thread implements ChatClient {
     }
 
 
-    @Override
     public void setUsername(String name) {
         this.username = name;
     }
 
 
-    @Override
     public String getUsername() {
         return this.username;
     }
 
 
-    @Override
     public void connectToServer(String host, int port) {
         // Terminate any existing connections
         if (socket != null) {
@@ -99,7 +93,6 @@ public class ChatClientImpl extends Thread implements ChatClient {
     }
 
 
-    @Override
     public boolean isConnected() {
         return (socket != null) && !socket.isClosed();
     }

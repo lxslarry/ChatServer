@@ -8,6 +8,7 @@ import java.awt.FlowLayout;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -44,7 +45,7 @@ public class ClientPanel extends JPanel implements ClientChangeListener {
     private static final int AREA_HEIGHT = Integer.parseInt("20");
 
     private ChatClient client;
-
+    
     private final JLabel usernameLabel;
     private final JLabel portLabel;
     private final JLabel ipLabel;
@@ -72,6 +73,7 @@ public class ClientPanel extends JPanel implements ClientChangeListener {
         this.client = chatClient;
         chatClient.addClientChangeListener(this);
 
+        
         usernameLabel = new JLabel(USERNAME_TEXT);
         portLabel = new JLabel(PORT_TEXT);
         ipLabel = new JLabel(IP_TEXT);
@@ -151,19 +153,16 @@ public class ClientPanel extends JPanel implements ClientChangeListener {
         panel.add(this.sendButton, BorderLayout.EAST);
         messageField.addKeyListener(new KeyListener() {
 
-            @Override
             public void keyTyped(KeyEvent e) {
                 // Ignore
             }
 
 
-            @Override
             public void keyReleased(KeyEvent e) {
                 // Ignore
             }
 
 
-            @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                     sendButton.doClick();
@@ -181,7 +180,6 @@ public class ClientPanel extends JPanel implements ClientChangeListener {
      * edu.cmu.cs.cs214.rec15.gui.ClientChangeListener#startChat(java.lang.String
      * , java.lang.String, java.lang.String)
      */
-    @Override
     public void startChat(String username, String port, String ip) {
         this.messageField.setEnabled(true);
         this.scrollPane.setEnabled(true);
@@ -197,17 +195,17 @@ public class ClientPanel extends JPanel implements ClientChangeListener {
      * edu.cmu.cs.cs214.rec15.gui.ClientChangeListener#messageReceived(java.
      * lang.String)
      */
-    @Override
     public void messageReceived(Message msg) {
         // Formatter for the date. See link you want to change the output format
         // https://docs.oracle.com/javase/8/docs/api/java/text/SimpleDateFormat.html
         // Usage: dateFormatter.format(date) -> String
         SimpleDateFormat dateFormatter = new SimpleDateFormat("HH:mm:ss Z");
+        Date d = new Date();
 
         // TODO: Make the server show the timestamp of the received message.
         // Example output: [15:21:40 -0400] Person: Some message...
 
-        String newText = String.format(" %s: %s%n", msg.getSender(),
+        String newText = String.format("[%s] %s: %s%n", dateFormatter.format(d), msg.getSender(),
                 msg.getContent());
         this.chatArea.append(newText);
         chatArea.setCaretPosition(chatArea.getDocument().getLength());
@@ -220,7 +218,6 @@ public class ClientPanel extends JPanel implements ClientChangeListener {
      * @param message
      *            text of message to be displayed
      */
-    @Override
     public void displayErrorMessage(String message) {
         JFrame frame = (JFrame) SwingUtilities.getRoot(this);
 

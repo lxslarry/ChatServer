@@ -88,25 +88,21 @@ public class ChatServerImpl extends Thread implements ChatServer {
     }
 
 
-    @Override
     public void startServer() {
         this.start();
     }
 
 
-    @Override
     public int getNumClients() {
         return clients.size();
     }
 
 
-    @Override
     public void setPort(int serverPort) {
         this.port = serverPort;
     }
 
 
-    @Override
     public void stopServer() {
         for (Socket s : clients) {
             if (s != null && !s.isClosed()) {
@@ -121,7 +117,6 @@ public class ChatServerImpl extends Thread implements ChatServer {
     }
 
 
-    @Override
     public ArrayList<Message> getMessages() {
         return (ArrayList<Message>) Collections.unmodifiableList(messages);
     }
@@ -141,7 +136,6 @@ public class ChatServerImpl extends Thread implements ChatServer {
         }
 
 
-        @Override
         public void run() {
             try {
                 ObjectInputStream in = new ObjectInputStream(

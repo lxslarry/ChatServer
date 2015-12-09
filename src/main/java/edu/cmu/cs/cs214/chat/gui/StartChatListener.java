@@ -59,7 +59,6 @@ public class StartChatListener implements ActionListener {
      * @see
      * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
      */
-    @Override
     public void actionPerformed(ActionEvent arg0) {
         mClient.setUsername(mName.getText());
         try {

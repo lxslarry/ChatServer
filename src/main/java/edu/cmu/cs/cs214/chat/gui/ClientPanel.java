@@ -203,7 +203,6 @@ public class ClientPanel extends JPanel implements ClientChangeListener {
         Date d = new Date();
 
         // TODO: Make the server show the timestamp of the received message.
-        // Example output: [15:21:40 -0400] Person: Some message...
 
         String newText = String.format("[%s] %s: %s%n", dateFormatter.format(d), msg.getSender(),
                 msg.getContent());
